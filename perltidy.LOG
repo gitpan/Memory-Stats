@@ -1,0 +1,8 @@
+perltidy version 20130922 log file on a darwin system, OLD_PERL_VERSION=5.018001
+Found Configuration File >>> /Users/weborama/.perltidyrc 
+Configuration and command line parameters for this run:
+-l=79 -i=4 -ci=4 -se -vt=2 -cti=0 -pt=1 -bt=1 -sbt=1 -bbt=1 -nsfs -nolq --break-at-old-comma-breakpoints -wbb=% + - * / x != == >= <= =~ < > | & **= += *= &= <<= &&= -= /= |= >>= ||= .= %= ^= x= --maximum-line-length=79 --warning-output --maximum-consecutive-blank-lines=2 --nohanging-side-comments -isbc -ci=2 -b -html -pre
+To find error messages search for 'WARNING' with your editor
+Line 1 implies starting-indentation-level = 0
+Suggest including 'use warnings;'
+Suggest including 'use strict;'
