@@ -12,14 +12,16 @@ package Memory::Stats;
 
 use strict;
 use warnings;
-our $VERSION = '0.01';    # VERSION
+our $VERSION = '0.02';    # VERSION
 use Proc::ProcessTable;
 use Carp qw/croak/;
 use Moo;
+use MooX::PrivateAttributes;
 
 my $pt = Proc::ProcessTable->new;
-my $current_memory_usage;
-my $delta_memory_usage;
+
+private_has '_current_memory_usage' => ( is => 'rw' );
+private_has '_delta_memory_usage'   => ( is => 'rw' );
 
 sub _get_current_memory_usage {
     my %info = map { $_->pid => $_ } @{ $pt->table };
@@ -27,22 +29,25 @@ sub _get_current_memory_usage {
 }
 
 sub start {
-    $current_memory_usage = _get_current_memory_usage();
+    shift->_current_memory_usage(_get_current_memory_usage);
     return;
 }
 
 sub stop {
+    my $self = shift;
     croak "Please call the method 'start' first !"
-        if !defined $current_memory_usage;
-    $delta_memory_usage = _get_current_memory_usage() - $current_memory_usage;
-    $current_memory_usage = undef;
+        if !defined $self->_current_memory_usage;
+    $self->_delta_memory_usage(
+        _get_current_memory_usage() - $self->_current_memory_usage );
+    $self->_current_memory_usage(undef);
     return;
 }
 
 sub get_memory_usage {
+    my $self = shift;
     croak "Please call the method 'start' then 'stop' first !"
-        if !defined $delta_memory_usage;
-    return $delta_memory_usage;
+        if !defined $self->_delta_memory_usage;
+    return $self->_delta_memory_usage;
 }
 
 1;
@@ -57,7 +62,7 @@ Memory::Stats - Memory Usage Consumption of your process
 
 =head1 VERSION
 
-version 0.01
+version 0.02
 
 =head1 DESCRIPTION
 

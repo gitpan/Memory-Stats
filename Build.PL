@@ -17,7 +17,7 @@ my %module_build_args = (
     "celogeek <me\@celogeek.com>"
   ],
   "dist_name" => "Memory-Stats",
-  "dist_version" => "0.01",
+  "dist_version" => "0.02",
   "license" => "perl",
   "module_name" => "Memory::Stats",
   "recommends" => {},
@@ -25,6 +25,7 @@ my %module_build_args = (
   "requires" => {
     "Carp" => 0,
     "Moo" => 0,
+    "MooX::PrivateAttributes" => 0,
     "Proc::ProcessTable" => 0,
     "perl" => "5.006",
     "strict" => 0,
@@ -37,22 +38,25 @@ my %module_build_args = (
     "IPC::Open3" => 0,
     "Scalar::Util" => 0,
     "Test::More" => "0.94",
-    "perl" => "5.004"
+    "perl" => "5.006"
   }
 );
 
 
+my %fallback_build_requires = (
+  "File::Spec" => 0,
+  "IO::Handle" => 0,
+  "IPC::Open3" => 0,
+  "Module::Build" => "0.3601",
+  "Scalar::Util" => 0,
+  "Test::More" => "0.94",
+  "perl" => "5.006"
+);
+
+
 unless ( eval { Module::Build->VERSION(0.4004) } ) {
-  my $tr = delete $module_build_args{test_requires};
-  my $br = $module_build_args{build_requires};
-  for my $mod ( keys %$tr ) {
-    if ( exists $br->{$mod} ) {
-      $br->{$mod} = $tr->{$mod} if $tr->{$mod} > $br->{$mod};
-    }
-    else {
-      $br->{$mod} = $tr->{$mod};
-    }
-  }
+  delete $module_build_args{test_requires};
+  $module_build_args{build_requires} = \%fallback_build_requires;
 }
 
 my $build = Module::Build->new(%module_build_args);
