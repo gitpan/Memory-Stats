@@ -3,13 +3,15 @@ abstract: 'Memory Usage Consumption of your process'
 author:
   - 'celogeek <me@celogeek.com>'
 build_requires:
+  DDP: 0
   File::Spec: 0
   IO::Handle: 0
   IPC::Open3: 0
   Module::Build: 0.3601
   Scalar::Util: 0
   Test::More: 0.94
-  perl: 5.006
+  Test::Trap: 0
+  perl: 5.010
 configure_requires:
   Module::Build: 0.3601
 dynamic_config: 0
@@ -22,16 +24,15 @@ name: Memory-Stats
 requires:
   Carp: 0
   Moo: 0
-  MooX::PrivateAttributes: 0
   Proc::ProcessTable: 0
-  perl: 5.006
+  perl: 5.010
   strict: 0
   warnings: 0
 resources:
   bugtracker: https://github.com/celogeek/perl-memory-stats/issues
   homepage: https://github.com/celogeek/perl-memory-stats
   repository: https://github.com/celogeek/perl-memory-stats.git
-version: 0.02
+version: 0.03
 x_Dist_Zilla:
   perl:
     version: 5.018002

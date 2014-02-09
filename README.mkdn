@@ -4,13 +4,13 @@ Memory::Stats - Memory Usage Consumption of your process
 
 # VERSION
 
-version 0.02
+version 0.03
 
 # DESCRIPTION
 
 This module give you the memory usage (resident RSS), of a part of your process. It use [Proc::ProcessTable](https://metacpan.org/pod/Proc::ProcessTable) and should work on all platforms supported by this module.
 
-You can check this link to for explanation : [http://blog.celogeek.com/201312/394/perl-universal-way-to-get-memory-usage-of-a-process/](http://blog.celogeek.com/201312/394/perl-universal-way-to-get-memory-usage-of-a-process/)
+You can check this link to for explanation: [http://blog.celogeek.com/201312/394/perl-universal-way-to-get-memory-usage-of-a-process/](http://blog.celogeek.com/201312/394/perl-universal-way-to-get-memory-usage-of-a-process/)
 
 # SYNOPSIS
 
@@ -20,22 +20,57 @@ You can check this link to for explanation : [http://blog.celogeek.com/201312/39
 
     $stats->start;
     # do something
+    $stats->checkpoint("before my big method")
+    # big method
+    $stats->checkpoint("after my big method")
     $stats->stop;
-    say "Memory consumed : ", $stats->get_memory_usage;
+    $stats->report;
 
 # METHODS
 
 ## start
 
-Init the recording
+Start recording memory usage.
+
+    $mu->start;
+
+## checkpoint
+
+Mark a step in the recording.
+
+    $mu->checkpoint('title of the checkpoint');
+
+You need to start first.
 
 ## stop
 
-Stop the recording
+Stop the recording.
 
-## get\_memory\_usage
+    $mu->stop;
 
-Return the last recording memory in KB
+You need to start first.
+
+## delta\_usage
+
+Get the current delta memory usage since the last checkpoint
+
+    $mu->delta_usage
+
+## usage
+
+Get the total memory usage (difference between stop and start)
+
+    $mu->usage
+
+You need to start and stop first.
+
+## report
+
+Dump all the recording.
+
+    $mu->report;
+
+It will display all memory checkpoint, with delta. You can call it at any times.
 
 # BUGS
 
@@ -52,7 +87,7 @@ celogeek <me@celogeek.com>
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 2013 by celogeek <me@celogeek.com>.
+This software is copyright (c) 2014 by celogeek <me@celogeek.com>.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.

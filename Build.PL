@@ -17,7 +17,7 @@ my %module_build_args = (
     "celogeek <me\@celogeek.com>"
   ],
   "dist_name" => "Memory-Stats",
-  "dist_version" => "0.02",
+  "dist_version" => "0.03",
   "license" => "perl",
   "module_name" => "Memory::Stats",
   "recommends" => {},
@@ -25,32 +25,35 @@ my %module_build_args = (
   "requires" => {
     "Carp" => 0,
     "Moo" => 0,
-    "MooX::PrivateAttributes" => 0,
     "Proc::ProcessTable" => 0,
-    "perl" => "5.006",
+    "perl" => "5.010",
     "strict" => 0,
     "warnings" => 0
   },
   "script_files" => [],
   "test_requires" => {
+    "DDP" => 0,
     "File::Spec" => 0,
     "IO::Handle" => 0,
     "IPC::Open3" => 0,
     "Scalar::Util" => 0,
     "Test::More" => "0.94",
-    "perl" => "5.006"
+    "Test::Trap" => 0,
+    "perl" => "5.010"
   }
 );
 
 
 my %fallback_build_requires = (
+  "DDP" => 0,
   "File::Spec" => 0,
   "IO::Handle" => 0,
   "IPC::Open3" => 0,
   "Module::Build" => "0.3601",
   "Scalar::Util" => 0,
   "Test::More" => "0.94",
-  "perl" => "5.006"
+  "Test::Trap" => 0,
+  "perl" => "5.010"
 );
 
 
