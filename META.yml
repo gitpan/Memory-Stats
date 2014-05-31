@@ -32,7 +32,7 @@ resources:
   bugtracker: https://github.com/celogeek/perl-memory-stats/issues
   homepage: https://github.com/celogeek/perl-memory-stats
   repository: https://github.com/celogeek/perl-memory-stats.git
-version: 0.03
+version: 0.04
 x_Dist_Zilla:
   perl:
     version: 5.018002

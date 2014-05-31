@@ -12,7 +12,7 @@ package Memory::Stats;
 
 use strict;
 use warnings;
-our $VERSION = '0.03';    # VERSION
+our $VERSION = '0.04';    # VERSION
 use Proc::ProcessTable;
 use Carp qw/croak/;
 use Moo;
@@ -103,7 +103,7 @@ Memory::Stats - Memory Usage Consumption of your process
 
 =head1 VERSION
 
-version 0.03
+version 0.04
 
 =head1 DESCRIPTION
 
@@ -119,9 +119,9 @@ You can check this link to for explanation: L<http://blog.celogeek.com/201312/39
 
   $stats->start;
   # do something
-  $stats->checkpoint("before my big method")
+  $stats->checkpoint("before my big method");
   # big method
-  $stats->checkpoint("after my big method")
+  $stats->checkpoint("after my big method");
   $stats->stop;
   $stats->report;
 
